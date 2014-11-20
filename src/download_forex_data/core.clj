@@ -12,10 +12,12 @@
         below-end? (fn [t] (time/within? (time/interval start end) t))]
           (take-while below-end? inf-range)))
 
-(def true-fx-months-available
-  (time-range (time/date-time 2009 5)
-              (time/date-time 2014 8) ; make this automatically adjust to current date
-              (time/months 1))) 
+(defn true-fx-months-available []
+  "TrueFX data begins in May 2009, and is available up until last month"
+  (let [one-month (time/months 1)]
+    (time-range (time/date-time 2009 5)
+                (time/minus (time/now) one-month) ; minus, as we always want last month
+                one-month)))
 
 (defn true-fx-url
   "Return a string that will contain tick data.
@@ -29,6 +31,6 @@
 
 (defn -main
   [& args]
-  (doseq [url (map #(true-fx-url % (first args)) true-fx-months-available)]
+  (doseq [url (map #(true-fx-url % (first args)) (true-fx-months-available))]
     (println url)))
 
