@@ -15,6 +15,3 @@ And then to download, and unpack all the data
 
 Be warned, downloading and unzipping one currency pair will take up ~10GB in disk space.
 
-## To Do
-The current code will only download tickdata from May 2009 to July 2014. When TrueFX upload new data, the code will need changing. It should be relatively simple to change the code to adjust automatically.
-
